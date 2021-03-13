@@ -11,33 +11,74 @@ import java.util.List;
 @RequestMapping("/api/movie-info")
 public class MovieInfoController {
 
-    private final MovieInfoRepository MovieInfoRepository;
+    private final MovieInfoRepository movieInfoRepository;
 
-    public MovieInfoController(MovieInfoRepository MovieInfoRepository) {
-        this.MovieInfoRepository = MovieInfoRepository;
+    public MovieInfoController(MovieInfoRepository movieInfoRepository) {
+        this.movieInfoRepository = movieInfoRepository;
     }
 
     @GetMapping
     public List<MovieInfoEntity> findAll() {
-        return this.MovieInfoRepository.findAll();
+        return this.movieInfoRepository.findAll();
     }
 
     @GetMapping("/{id}")
     public MovieInfoEntity findById(@PathVariable int id) {
-        return this.MovieInfoRepository.findById(id);
+        return this.movieInfoRepository.findById(id);
     }
 
     @PostMapping("/insert")
-    public MovieInfoResponse insert(@RequestBody MovieInfoEntity MovieInfoEntity) {
-        MovieInfoResponse MovieInfoResponse = new MovieInfoResponse();
+    public MovieInfoResponse insert(@RequestBody MovieInfoEntity movieInfoEntity) {
+        MovieInfoResponse movieInfoResponse = new MovieInfoResponse();
         try {
-            MovieInfoEntity MovieInfo = this.MovieInfoRepository.save(MovieInfoEntity);
-            MovieInfoResponse.setMessage("Insert success");
-            MovieInfoResponse.setMovieInfo(MovieInfo);
+            MovieInfoEntity movieInfo = this.movieInfoRepository.save(movieInfoEntity);
+            movieInfoResponse.setMessage("Insert success");
+            movieInfoResponse.setMovieInfo(MovieInfo);
         } catch (Exception exception) {
-            MovieInfoResponse.setMessage("Can not insert");
+            movieInfoResponse.setMessage("Can not insert");
         }
-        return MovieInfoResponse;
+        return movieInfoResponse;
+    }
+
+    @PutMapping("/update/{id}")
+    public MovieInfoResponse update(@PathVariable int id,
+                                           @RequestBody MovieInfoEntity movieInfoEntity) {
+        MovieInfoResponse movieInfoResponse = new MovieInfoResponse();
+        try {
+            MovieInfoEntity movieInfo = this.movieInfoRepository.findById(id);
+            if (null != movieInfo) {
+                movieInfo.setName(movieInfoEntity.getName());
+                movieInfo.setDescription(movieInfoEntity.getDescription());
+                movieInfo.setMovieTheater(movieInfoEntity.getMovieTheater());
+                movieInfo.setStartDate(movieInfoEntity.getStartDate());
+                movieInfo.setShowTimes(movieInfoEntity.getShowTimes());
+                movieInfo = this.movieInfoRepository.save(movieInfo);
+                movieInfo.setMovieInformation(movieInfo);
+                movieInfo.setMessage("Update Success");
+            } else {
+                movieInfoResponse.setMessage("Everything up to date");
+            }
+        } catch (Exception exception) {
+            movieInfoResponse.setMessage("Can not update");
+        }
+        return movieInfoResponse;
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public MovieInfoResponse update(@PathVariable int id) {
+        MovieInfoResponse movieInfoResponse = new MovieInfoResponse();
+        try {
+            MovieInfoEntity movieInfo = this.movieInfoRepository.findById(id);
+            if (null != movieInfo) {
+                this.movieInfoRepository.delete(movieInfo);
+                movieInfoResponse.setMessage("Delete Success");
+            } else {
+                movieInfoResponse.setMessage("No data to delete");
+            }
+        } catch (Exception exception) {
+            movieInfoResponse.setMessage("Can not Delete");
+        }
+        return movieInfoResponse;
     }
 
 }
