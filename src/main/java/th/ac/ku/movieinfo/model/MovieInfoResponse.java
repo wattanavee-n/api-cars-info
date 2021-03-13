@@ -2,16 +2,16 @@ package th.ac.ku.movieinfo.model;
 
 public class MovieInfoResponse {
 
-    private MovieInfoEntity MovieInfo;
+    private MovieInfoEntity movieInfo;
 
     private String message;
 
     public MovieInfoEntity getMovieInfo() {
-        return MovieInfo;
+        return movieInfo;
     }
 
-    public void setMovieInfo(MovieInfoEntity MovieInfo) {
-        this.MovieInfo = MovieInfo;
+    public void setMovieInfo(MovieInfoEntity movieInfo) {
+        this.movieInfo = movieInfo;
     }
 
     public String getMessage() {
