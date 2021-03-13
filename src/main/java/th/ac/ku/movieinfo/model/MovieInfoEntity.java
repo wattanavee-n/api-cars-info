@@ -1,5 +1,4 @@
 package th.ac.ku.movieinfo.model;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,7 +14,7 @@ public class MovieInfoEntity {
 
     private String name;
 
-    private String description;
+    private String desc;
 
     private String movieTheater;
 
@@ -39,12 +38,12 @@ public class MovieInfoEntity {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getdesc() {
+        return desc;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setdesc(String desc) {
+        this.desc = desc;
     }
 
     public String getMovieTheater() {
