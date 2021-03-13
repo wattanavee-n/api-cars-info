@@ -1,5 +1,4 @@
 package th.ac.ku.movieinfo.controller;
-
 import org.springframework.web.bind.annotation.*;
 import th.ac.ku.movieinfo.model.MovieInfoEntity;
 import th.ac.ku.movieinfo.model.MovieInfoResponse;
@@ -48,7 +47,7 @@ public class MovieInfoController {
             MovieInfoEntity movieInfo = this.movieInfoRepository.findById(id);
             if (null != movieInfo) {
                 movieInfo.setName(movieInfoEntity.getName());
-                movieInfo.setDescription(movieInfoEntity.getDescription());
+                movieInfo.setdesc(movieInfoEntity.getdesc());
                 movieInfo.setMovieTheater(movieInfoEntity.getMovieTheater());
                 movieInfo.setStartDate(movieInfoEntity.getStartDate());
                 movieInfo.setShowTimes(movieInfoEntity.getShowTimes());
