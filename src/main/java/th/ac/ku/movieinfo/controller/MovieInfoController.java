@@ -56,7 +56,7 @@ public class MovieInfoController {
                 movieInfo.setMovieInformation(movieInfo);
                 movieInfo.setMessage("Update Success");
             } else {
-                movieInfoResponse.setMessage("Everything up to date");
+                movieInfoResponse.setMessage("Everything all up to date");
             }
         } catch (Exception exception) {
             movieInfoResponse.setMessage("Can not update");
